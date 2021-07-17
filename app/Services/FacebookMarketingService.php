@@ -3,9 +3,20 @@
 namespace App\Services;
 
 use App\Contracts\Services\FacebookMarketingContract;
+use Illuminate\Http\Request;
 
 class FacebookMarketingService implements FacebookMarketingContract
 {
+    /**
+     * @var string
+     */
+    private $fbUrl;
+
+    public function __construct()
+    {
+        $this->fbUrl = "https://graph.facebook.com/" . env("FB_VERSION") . "/";
+    }
+
 
     /**
      * @return mixed
@@ -15,63 +26,67 @@ class FacebookMarketingService implements FacebookMarketingContract
         return "Test success";
     }
 
-    public function AdAccountAPI($accessToken, $actAdAccount)
+    public function adAccountAPI(Request $request)
     {
-        // return env("FBVERSION");
         $ch = curl_init();
-        $url = "https://graph.facebook.com/" . env("FBVERSION") . "/$actAdAccount/users";
+
+        $url = $this->fbUrl . trim($request['act_ad_account']) . "/users";
 
         //curl_setopt($ch, CURLOPT_URL, 'https://graph.facebook.com/v2.11/act_<AD_ACCOUNT_ID>/users');
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, "access_token=$accessToken");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "access_token=" . trim($request['access_token']));
 
         $headers = array();
+
         $headers[] = 'Content-Type: application/x-www-form-urlencoded';
+
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
         $result = curl_exec($ch);
-        $jsonResult = json_decode($result, true);
+
         if (curl_errno($ch)) {
             echo 'Error:' . curl_error($ch);
         }
         curl_close($ch);
 
-        return $jsonResult;
+        return $result;
     }
 
-    public function getPageListAPI($accessToken)
+    public function getPageListAPI(Request $request)
     {
         $ch = curl_init();
-        $url = "https://graph.facebook.com/" . env("FBVERSION") . "/me/accounts?access_token=$accessToken";
+
+        $url = $this->fbUrl . "me/accounts?access_token=" . trim($request['access_token']);
 
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
         $result = curl_exec($ch);
 
-        //  dd(json_decode($result, true));
-        $jsonResult = json_decode($result, true);
-
         if (curl_errno($ch)) {
             echo 'Error:' . curl_error($ch);
         }
         curl_close($ch);
-        return $jsonResult;
+
+        return $result;
     }
+
+    /**
+     * This is The list of pixel ID
+     *
+     * future work : get the name of the pixel like ?fields=name
+     * @param $accessToken
+     * @param $businessId
+     * @return mixed
+     */
+
 
     public function getPixelListAPI($accessToken, $businessId)
     {
-        /**
-         *
-         *
-         * This is The list of pixel ID
-         *
-         * future work : get the name of the pixel like ?fields=name
-         */
-
         $ch = curl_init();
-        $url = "https://graph.facebook.com/" . env("FBVERSION") . "/$businessId/adspixels?access_token=$accessToken";
+        $url = $this->fbUrl . $businessId . '/adspixels?access_token=' . $accessToken;
 
         //curl_setopt($ch, CURLOPT_URL, 'https://graph.facebook.com/v11.0/<business_id>/adspixels?fields=name&&access_token=');
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -86,28 +101,25 @@ class FacebookMarketingService implements FacebookMarketingContract
 
         $result = curl_exec($ch);
 
-        //  dd(json_decode($result, true));
-        $jsonResult = json_decode($result, true);
-
         if (curl_errno($ch)) {
             echo 'Error:' . curl_error($ch);
         }
         curl_close($ch);
-        return $jsonResult;
+
+        return $result;
 
     }
 
     public function getInstagramListAPI(): string
     {
         //To check all the Instagram accounts that are owned by a business or that can be accessed by a business,
-// make a GET request:
+        // make a GET request:
 
 
         $ch = curl_init();
 
-
-// curl_setopt($ch, CURLOPT_URL, 'business=100405035640930
-// \"https://graph.facebook.com/v11.0/4100799329931256/authorized_adaccounts');
+        // curl_setopt($ch, CURLOPT_URL, 'business=100405035640930
+        // \"https://graph.facebook.com/v11.0/4100799329931256/authorized_adaccounts');
         curl_setopt($ch, CURLOPT_URL, "https://graph.facebook.com/v11.0/<business_id>/instagram_accounts");
         curl_setopt($ch, CURLOPT_URL, 'fields=username');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -119,14 +131,14 @@ class FacebookMarketingService implements FacebookMarketingContract
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
 
-// curl_setopt($ch, CURLOPT_URL, 'fields=username,profile_pic');
-// curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-// curl_setopt($ch, CURLOPT_POST, 1);
-// curl_setopt($ch, CURLOPT_POSTFIELDS, "access_token=\n-d");
+        // curl_setopt($ch, CURLOPT_URL, 'fields=username,profile_pic');
+        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        // curl_setopt($ch, CURLOPT_POST, 1);
+        // curl_setopt($ch, CURLOPT_POSTFIELDS, "access_token=\n-d");
 
-// $headers = array();
-// $headers[] = 'Content-Type: application/x-www-form-urlencoded';
-// curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        // $headers = array();
+        // $headers[] = 'Content-Type: application/x-www-form-urlencoded';
+        // curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
         $result = curl_exec($ch);
         echo '<pre>';
@@ -137,7 +149,7 @@ class FacebookMarketingService implements FacebookMarketingContract
         curl_close($ch);
 
 
-//https://developers.facebook.com/docs/instagram/ads-api/guides/ig-accounts-with-business-manager#account_api
+        //https://developers.facebook.com/docs/instagram/ads-api/guides/ig-accounts-with-business-manager#account_api
 
     }
 
@@ -146,38 +158,35 @@ class FacebookMarketingService implements FacebookMarketingContract
         return "This is get Ad Account List";
     }
 
-    public function InvitePeopleAPI($accessToken, $businessId, $email, $role)
+    public function InvitePeopleAPI(Request $request)
     {
         $ch = curl_init();
-        $url = "https://graph.facebook.com/" . env("FBVERSION") . "$businessId/business_users";
+
+        $url = $this->fbUrl . $request['business_id'] . "/business_users";
 
 
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
         $post = array(
-            'email' => $email,//'shakil.neub@gmail.com',
-            'role' => $role,//'ADMIN',
-            'access_token' => $accessToken
+            'email' => $request['email'],//'shakil.neub@gmail.com',
+            'role' => $request['role'],//'ADMIN',
+            'access_token' => trim($request['access_token'])
         );
         curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
 
         $result = curl_exec($ch);
 
-        //dd(json_decode($result, true));
-        $jsonResult = json_decode($result, true);
-
-        // var_dump(json_decode($result,true));
-
         if (curl_errno($ch)) {
             echo 'Error:' . curl_error($ch);
         }
         curl_close($ch);
-        return $jsonResult;
+
+        return $result;
 
     }
 
-    public function GrantAccesstoAssetsforAnotherBusinessManagerAPI()
+    public function grantAccessToAssetsForAnotherBusinessManagerAPI(Request $request)
     {
         $ch = curl_init();
 
@@ -200,7 +209,7 @@ class FacebookMarketingService implements FacebookMarketingContract
 
     }
 
-    public function getSystemUserAPI()
+    public function getSystemUserAPI(Request $request)
     {
         $ch = curl_init();
 
@@ -296,8 +305,8 @@ class FacebookMarketingService implements FacebookMarketingContract
         curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
 
         $result = curl_exec($ch);
-        echo '<pre>';
-        var_dump(json_decode($result, true));
+
+
         if (curl_errno($ch)) {
             echo 'Error:' . curl_error($ch);
         }
@@ -326,7 +335,7 @@ class FacebookMarketingService implements FacebookMarketingContract
         }
         curl_close($ch);
 
-//https://developers.facebook.com/docs/marketing-api/business-asset-management/guides/ad-accounts
+        //https://developers.facebook.com/docs/marketing-api/business-asset-management/guides/ad-accounts
     }
 
 }

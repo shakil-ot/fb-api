@@ -24,77 +24,61 @@ class FacebookMarketingController extends Controller
         return $this->facebookMarketingService->testApi($request);
     }
 
-    public function AdAccount(Request $request)
+    public function adAccount(Request $request)
     {
-        //dd($request->all());
-        return $this->facebookMarketingService->AdAccountAPI($accessToken = 'EAAqXFOLkdBcBAFh8PwhdZBJcIyu8BFDn5JO4skOZBkoy1tlF90arZA68LkVL7jMMoGwjGmqTMreiuiLravtZBZCYXep8rae3QnMQb319beWGQNKoceqm2CD5HNdZArqehBf3YVpqQeoPhS6NherpDZALYLay9TdfZAVF8cW6ZB8IKUkHZBBhGGmMrZCx6ZCWn8ddfDIZCP2ZBOWzZCRDQZDZD', $actAdAccount = 'act_343129890791839');
+        return $this->facebookMarketingService->adAccountAPI($request);
     }
 
     public function getPageList(Request $request)
     {
-        //dd($request->all());
-        return $this->facebookMarketingService->getPageListAPI($request['access_token']);
+        return $this->facebookMarketingService->getPageListAPI($request);
     }
 
     public function getPixelList(Request $request)
     {
         // dd($request->all());
-        return $this->facebookMarketingService->getPixelListAPI($request['access_token'],['business_id']);
+        return $this->facebookMarketingService->getPixelListAPI($request['access_token'], $request['business_id']);
     }
 
     public function getInstagramList(Request $request)
     {
-        dd($request->all());
         return $this->facebookMarketingService->getInstagramListAPI();
     }
 
-    public function getAdAccountList(Request $request)
+    public function invitePeople(Request $request)
     {
-        dd($request->all());
-        return $this->facebookMarketingService->getAdAccountListAPI();
-    }
-
-    public function InvitePeople(Request $request)
-    {
-        //dd($request->all());
-        return $this->facebookMarketingService->InvitePeopleAPI($request['access_token,business_id,email,role']);
+        return $this->facebookMarketingService->invitePeopleAPI($request);
     }
 
 
-    public function GrantAccesstoAssetsforAnotherBusinessManager(Request $request)
+    public function grantAccessToAssetsForAnotherBusinessManagerAPI(Request $request)
     {
-        dd($request->all());
-        return $this->facebookMarketingService->GrantAccesstoAssetsforAnotherBusinessManagerAPI($request[]);
+        return $this->facebookMarketingService->grantAccessToAssetsForAnotherBusinessManagerAPI($request);
     }
 
 
     public function getSystemUser(Request $request)
     {
-        dd($request->all());
-        return $this->facebookMarketingService->getSystemUserAPI($request[]);
+        return $this->facebookMarketingService->getSystemUserAPI($request);
     }
 
     public function createBusinessManager(Request $request)
     {
-        dd($request->all());
-        return $this->facebookMarketingService->createBusinessManagerAPI($request[]);
+        return $this->facebookMarketingService->createBusinessManagerAPI($request);
     }
 
     public function clientAdAccount(Request $request)
     {
-        dd($request->all());
-        return $this->facebookMarketingService->clientAdAccountAPI($request[]);
+        return $this->facebookMarketingService->clientAdAccountAPI($request);
     }
 
     public function claimClientPage(Request $request)
     {
-        dd($request->all());
-        return $this->facebookMarketingService->claimClientPageAPI($request[]);
+        return $this->facebookMarketingService->claimClientPageAPI($request);
     }
 
     public function claimAdAccount(Request $request)
     {
-        dd($request->all());
-        return $this->facebookMarketingService->claimAdAccountAPI($request[]);
+        return $this->facebookMarketingService->claimAdAccountAPI($request);
     }
 }

@@ -3,12 +3,13 @@
 namespace App\Contracts\Services;
 
 
+use Illuminate\Http\Request;
+
 interface FacebookMarketingContract
 {
-    //public function testApi();
-    public function AdAccountAPI($accessToken, $actAdAccount);
+    public function adAccountAPI(Request $request); // done
 
-    public function getPageListAPI($accessToken);
+    public function getPageListAPI(Request $request); // done
 
     public function getPixelListAPI($accessToken, $businessId);
 
@@ -16,11 +17,11 @@ interface FacebookMarketingContract
 
     public function getAdAccountListAPI();
 
-    public function InvitePeopleAPI($accessToken, $businessId, $email, $role);
+    public function InvitePeopleAPI(Request $request);
 
-    public function GrantAccesstoAssetsforAnotherBusinessManagerAPI();
+    public function grantAccessToAssetsForAnotherBusinessManagerAPI(Request $request);
 
-    public function getSystemUserAPI();
+    public function getSystemUserAPI(Request $request);
 
     public function createBusinessManagerAPI();
 
