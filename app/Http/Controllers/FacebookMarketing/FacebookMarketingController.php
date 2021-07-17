@@ -36,13 +36,12 @@ class FacebookMarketingController extends Controller
 
     public function getPixelList(Request $request)
     {
-        // dd($request->all());
-        return $this->facebookMarketingService->getPixelListAPI($request['access_token'], $request['business_id']);
+        return $this->facebookMarketingService->getPixelListAPI($request);
     }
 
     public function getInstagramList(Request $request)
     {
-        return $this->facebookMarketingService->getInstagramListAPI();
+        return $this->facebookMarketingService->getInstagramListAPI($request);
     }
 
     public function invitePeople(Request $request)

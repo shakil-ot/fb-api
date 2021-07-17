@@ -24,7 +24,7 @@ Route::get('/adAccount', 'FacebookMarketing\FacebookMarketingController@adAccoun
 Route::get('/pageList', 'FacebookMarketing\FacebookMarketingController@getPageList');
 Route::get('/pixelList', 'FacebookMarketing\FacebookMarketingController@getPixelList');
 Route::get('/igList', 'FacebookMarketing\FacebookMarketingController@getInstagramList');
-Route::get('/invitePeople', 'FacebookMarketing\FacebookMarketingController@InvitePeople');
+Route::get('/invitePeople', 'FacebookMarketing\FacebookMarketingController@invitePeople');
 Route::get('/grant/access/to/assets', 'FacebookMarketing\FacebookMarketingController@grantAccessToAssetsForAnotherBusinessManager');
 Route::get('/getSystemUser', 'FacebookMarketing\FacebookMarketingController@getSystemUser');
 Route::get('/createBusinessManager', 'FacebookMarketing\FacebookMarketingController@createBusinessManager');
