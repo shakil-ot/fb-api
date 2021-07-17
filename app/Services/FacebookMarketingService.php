@@ -10,8 +10,12 @@ class FacebookMarketingService implements FacebookMarketingContract
     /**
      * @return mixed
      */
-    public function testApi()
+    public function testApi($request)
     {
-       return "Test success";
+        $url = "facebook/". env('FB_VERSION') . "/hello/". $request['business_id'];
+
+       return $url;
     }
+
+
 }

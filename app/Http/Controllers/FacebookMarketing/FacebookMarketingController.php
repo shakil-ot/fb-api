@@ -21,7 +21,7 @@ class FacebookMarketingController extends Controller
 
     public function initTesting(Request $request)
     {
-        return $this->facebookMarketingService->testApi();
+        return $this->facebookMarketingService->testApi($request);
     }
 
 }

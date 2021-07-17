@@ -5,7 +5,8 @@ namespace App\Contracts\Services;
 
 interface FacebookMarketingContract
 {
-    public function testApi();
+    public function testApi($request);
+
 }
 
 
