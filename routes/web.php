@@ -36,6 +36,8 @@ Route::get('/clientAdAccount', 'FacebookMarketing\FacebookMarketingController@cl
 Route::get('/claimClientPage', 'FacebookMarketing\FacebookMarketingController@claimClientPage');
 Route::get('/claimAdAccount', 'FacebookMarketing\FacebookMarketingController@claimAdAccount');
 Route::get('/fbLogin', 'FacebookMarketing\FacebookMarketingController@fbLogin');
+Route::get('/{id}/facebook/permission', 'FacebookMarketing\FacebookMarketingController@facebookPermissionPage');
+Route::get('/access-save/', 'FacebookMarketing\FacebookMarketingController@accessSave')->name('access-save');
 
 
 

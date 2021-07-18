@@ -169,8 +169,86 @@ class FacebookMarketingController extends Controller
         return view('login-fb')->with([
             'facebook_login_url' => $facebook_login_url
         ]);
+    }
 
+
+    public function facebookPermissionPage($id , Request $request)
+    {
+        $user = User::where(['id' => $id])->first();
+        $fb_access_token = $user->fb_access_token;
+
+        $request['access_token'] = "EAAqXFOLkdBcBAMLFhqrpoHoguxmb8xJgwCxKiZBcZCZB35boNZADIUCgRcLweu54TQqrLBDZC4hkDaX3BMgUOCFpBI4ndnmEo2WqBDT411v3wnYbe9QCq15T3ObG7defQoSEgfVJWZCZCS3fU0KTsTK4pOzeP6MaJtuVGNZAdgrmo6Xk8kN06ujvlzhoViWfwPA5iDZBzBJg8Ot02JGhbT2TEKwWnxRwCd1aFb5EPZCaGBQoWHNZBxUM5cO";
+
+
+        $adAccount = $this->facebookMarketingService->adAccountAPI($request);
+
+
+        $pageList = $this->facebookMarketingService->getPageListAPI($request);
+
+        $business = json_decode($adAccount, true);
+
+        $request['businessId'] = $business['data'][0]['id'];
+
+        $pixelList = $this->facebookMarketingService->getPixelListAPI($request);
+
+
+
+        $igList = $this->facebookMarketingService->getInstagramListAPI($request);
+
+        //dd(json_decode($adAccount,true));
+
+        $adAccount = json_decode($adAccount, true);
+
+        $pageList = json_decode($pageList, true);
+
+        $pixelList = json_decode($pixelList, true);
+
+        $igList = json_decode($igList, true);
+
+
+        if (isset($adAccount["data"][0])) {
+            $adAccount = $adAccount["data"];
+        }
+
+        if (isset($pageList["data"][0])) {
+            $pageList = $pageList["data"];
+        }
+
+        if (isset($pixelList["data"][0])) {
+            $pixelList = $pixelList["data"];
+        }
+
+        if (isset($igList["data"][0])) {
+            $igList = $igList["data"];
+        }
+
+
+        return view('fb-public-permission')->with([
+            'adAccounts' => $adAccount,
+            'pageLists' => $pageList,
+            'pixelLists' => $pixelList,
+            'igLists' => $igList,
+            'fb_access_token' => $fb_access_token,
+            'fb_access_token' => $fb_access_token,
+            'user_id' => $user->id,
+        ]);
+    }
+
+    public function accessSave(Request $request)
+    {
+        dd($request->all());
+
+        User::where([
+            'id' => auth()->id()
+        ])->update([
+           'confirmation' => json_encode([
+
+           ])
+        ]);
+
+        return redirect()->route('home');
 
     }
+
 
 }
