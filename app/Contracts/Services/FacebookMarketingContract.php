@@ -11,25 +11,23 @@ interface FacebookMarketingContract
 
     public function getPageListAPI(Request $request); // done
 
-    public function getPixelListAPI($accessToken, $businessId);
+    public function getPixelListAPI(Request $request); //done
 
-    public function getInstagramListAPI();
+    public function getInstagramListAPI(Request $request); //done
 
-    public function getAdAccountListAPI();
+    public function InvitePeopleAPI(Request $request); //done
 
-    public function InvitePeopleAPI(Request $request);
+    public function grantAccessToAssetsForAnotherBusinessManagerAPI(Request $request); //done
 
-    public function grantAccessToAssetsForAnotherBusinessManagerAPI(Request $request);
+    public function getSystemUserAPI(Request $request); //done
 
-    public function getSystemUserAPI(Request $request);
+    public function createBusinessManagerAPI(Request $request); //done
 
-    public function createBusinessManagerAPI();
+    public function clientAdAccountAPI(Request $request); //done
 
-    public function clientAdAccountAPI();
+    public function claimClientPageAPI(Request $request); //done
 
-    public function claimClientPageAPI();
-
-    public function claimAdAccountAPI();
+    public function claimAdAccountAPI(Request $request); //done
 }
 
 

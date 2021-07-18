@@ -19,12 +19,16 @@ Route::get('/demo', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/email','HomeController@sendEmailForBusinessManager');
+Route::get('/pageAccess','HomeController@givePageAccess');
+
+
 Route::get('/init-testing', 'FacebookMarketing\FacebookMarketingController@initTesting');
 Route::get('/adAccount', 'FacebookMarketing\FacebookMarketingController@adAccount');
 Route::get('/pageList', 'FacebookMarketing\FacebookMarketingController@getPageList');
 Route::get('/pixelList', 'FacebookMarketing\FacebookMarketingController@getPixelList');
 Route::get('/igList', 'FacebookMarketing\FacebookMarketingController@getInstagramList');
-Route::get('/invitePeople', 'FacebookMarketing\FacebookMarketingController@InvitePeople');
+Route::get('/invitePeople', 'FacebookMarketing\FacebookMarketingController@invitePeople');
 Route::get('/grant/access/to/assets', 'FacebookMarketing\FacebookMarketingController@grantAccessToAssetsForAnotherBusinessManager');
 Route::get('/getSystemUser', 'FacebookMarketing\FacebookMarketingController@getSystemUser');
 Route::get('/createBusinessManager', 'FacebookMarketing\FacebookMarketingController@createBusinessManager');
@@ -32,5 +36,7 @@ Route::get('/clientAdAccount', 'FacebookMarketing\FacebookMarketingController@cl
 Route::get('/claimClientPage', 'FacebookMarketing\FacebookMarketingController@claimClientPage');
 Route::get('/claimAdAccount', 'FacebookMarketing\FacebookMarketingController@claimAdAccount');
 Route::get('/fbLogin', 'FacebookMarketing\FacebookMarketingController@fbLogin');
+
+
 
 

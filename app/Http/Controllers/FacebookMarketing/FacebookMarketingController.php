@@ -38,13 +38,12 @@ class FacebookMarketingController extends Controller
 
     public function getPixelList(Request $request)
     {
-        // dd($request->all());
-        return $this->facebookMarketingService->getPixelListAPI($request['access_token'], $request['business_id']);
+        return $this->facebookMarketingService->getPixelListAPI($request);
     }
 
     public function getInstagramList(Request $request)
     {
-        return $this->facebookMarketingService->getInstagramListAPI();
+        return $this->facebookMarketingService->getInstagramListAPI($request);
     }
 
     public function invitePeople(Request $request)
@@ -86,6 +85,7 @@ class FacebookMarketingController extends Controller
 
     public function fbLogin()
     {
+
         if(!session_id())
         {
             session_start();
@@ -151,7 +151,7 @@ class FacebookMarketingController extends Controller
             // Get login url
             $facebook_permissions = ['email']; // Optional permissions
 
-            $facebook_login_url = $facebook_helper->getLoginUrl('http://localhost:8000/fbLogin/');
+            $facebook_login_url = $facebook_helper->getLoginUrl('http://localhost:8000/fbLogin/', $facebook_permissions);
 
             // Render Facebook login button
             $facebook_login_url = '<div align="center"><a href="'.$facebook_login_url.'">Log in</a></div>';
