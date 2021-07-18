@@ -28,16 +28,13 @@ class FacebookMarketingService implements FacebookMarketingContract
 
     public function adAccountAPI(Request $request)
     {
+
         $ch = curl_init();
+        $url = $this->fbUrl.'/me/businesses?access_token='.trim($request['access_token']);
 
-        $url = $this->fbUrl . trim($request['act_ad_account']) . "/users";
 
-        //curl_setopt($ch, CURLOPT_URL, 'https://graph.facebook.com/v2.11/act_<AD_ACCOUNT_ID>/users');
-        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, "access_token=" . trim($request['access_token']));
-
         $headers = array();
 
         $headers[] = 'Content-Type: application/x-www-form-urlencoded';
@@ -86,7 +83,7 @@ class FacebookMarketingService implements FacebookMarketingContract
     public function getPixelListAPI(Request $request)
     {
         $ch = curl_init();
-        $url = $this->fbUrl.$request['businessId'].'/adspixels?access_token='.trim($request['access_token']);
+        $url = $this->fbUrl.$request['businessId'].'/adspixels?fields=name&access_token='.trim($request['access_token']);
 
         //curl_setopt($ch, CURLOPT_URL, 'https://graph.facebook.com/v11.0/<business_id>/adspixels?fields=name&&access_token=');
 
@@ -118,32 +115,22 @@ class FacebookMarketingService implements FacebookMarketingContract
         //To check all the Instagram accounts that are owned by a business or that can be accessed by a business,
         // make a GET request:
 
-
         $ch = curl_init();
 
-        $url = $this->fbUrl.$request['businessId']."/instagram_accounts";
+        $url = $this->fbUrl.$request['businessId']."/instagram_accounts?fields=username&access_token=".$request['access_token'];
 
-        // curl_setopt($ch, CURLOPT_URL, 'business=100405035640930
-        // \"https://graph.facebook.com/v11.0/4100799329931256/authorized_adaccounts');
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_URL, 'fields=username');
+
+
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, "access_token=.$request['access_token'].\n-d");
+
 
         $headers = array();
+
         $headers[] = 'Content-Type: application/x-www-form-urlencoded';
+
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-
-        // curl_setopt($ch, CURLOPT_URL, 'fields=username,profile_pic');
-        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        // curl_setopt($ch, CURLOPT_POST, 1);
-        // curl_setopt($ch, CURLOPT_POSTFIELDS, "access_token=\n-d");
-
-        // $headers = array();
-        // $headers[] = 'Content-Type: application/x-www-form-urlencoded';
-        // curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
         $result = curl_exec($ch);
 
@@ -160,6 +147,7 @@ class FacebookMarketingService implements FacebookMarketingContract
 
     public function InvitePeopleAPI(Request $request)
     {
+
         $ch = curl_init();
 
         $url = $this->fbUrl . $request['business_id'] . "/business_users";
@@ -181,8 +169,9 @@ class FacebookMarketingService implements FacebookMarketingContract
             echo 'Error:' . curl_error($ch);
         }
         curl_close($ch);
-
+    //dd($result,true);
         return $result;
+
 
     }
 
@@ -253,7 +242,7 @@ class FacebookMarketingService implements FacebookMarketingContract
         $post = array(
             'name' => $request['pageName'],
             'vertical' => $request['pageRole'],
-            'primary_page' => $request[pageId],
+            'primary_page' => $request['pageId'],
             'timezone_id' => '1',
             'access_token' => $request[$access_token]
         );
@@ -308,6 +297,7 @@ class FacebookMarketingService implements FacebookMarketingContract
 
     public function claimClientPageAPI(Request $request)
     {
+
         $ch = curl_init();
         /**
          *
@@ -345,6 +335,7 @@ class FacebookMarketingService implements FacebookMarketingContract
         }
         curl_close($ch);
 
+        //dd($result,true);
         return $result;
 
     }

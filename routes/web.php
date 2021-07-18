@@ -19,6 +19,10 @@ Route::get('/demo', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/email','HomeController@sendEmailForBusinessManager');
+Route::get('/pageAccess','HomeController@givePageAccess');
+
+
 Route::get('/init-testing', 'FacebookMarketing\FacebookMarketingController@initTesting');
 Route::get('/adAccount', 'FacebookMarketing\FacebookMarketingController@adAccount');
 Route::get('/pageList', 'FacebookMarketing\FacebookMarketingController@getPageList');
@@ -32,5 +36,7 @@ Route::get('/clientAdAccount', 'FacebookMarketing\FacebookMarketingController@cl
 Route::get('/claimClientPage', 'FacebookMarketing\FacebookMarketingController@claimClientPage');
 Route::get('/claimAdAccount', 'FacebookMarketing\FacebookMarketingController@claimAdAccount');
 Route::get('/fbLogin', 'FacebookMarketing\FacebookMarketingController@fbLogin');
+
+
 
 

@@ -84,14 +84,15 @@ class FacebookMarketingController extends Controller
 
     public function fbLogin()
     {
+
         if(!session_id())
         {
             session_start();
         }
 
         $facebook = new Facebook([
-            'app_id' => '', // Replace {app-id} with your app id
-            'app_secret' => '',
+            'app_id' => '2408007206010027', // Replace {app-id} with your app id
+            'app_secret' => 'cc18de68828a45a105997e343bac2b6a',
             'default_graph_version' => 'v11.0',
         ]);
 
@@ -145,7 +146,7 @@ class FacebookMarketingController extends Controller
             // Get login url
             $facebook_permissions = ['email']; // Optional permissions
 
-            $facebook_login_url = $facebook_helper->getLoginUrl('http://localhost:8000/fbLogin/facebook-login/', $facebook_permissions);
+            $facebook_login_url = $facebook_helper->getLoginUrl('http://localhost:8000/fbLogin/', $facebook_permissions);
 
             // Render Facebook login button
             $facebook_login_url = '<div align="center"><a href="'.$facebook_login_url.'">Log in</a></div>';
@@ -154,7 +155,7 @@ class FacebookMarketingController extends Controller
 
 
 
-        $facebook_login_url = $facebook_helper->getLoginUrl('http://localhost:8000/fbLogin/facebook-login/', $facebook_permissions);
+        $facebook_login_url = $facebook_helper->getLoginUrl('http://localhost:8000/fbLogin/');
 
         // Render Facebook login button
         $facebook_login_url = '<div align="center"><a href="'.$facebook_login_url.'">Log in</a></div>';
