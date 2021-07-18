@@ -35,7 +35,7 @@
 
                                 <div class="form-group">
                                     <label for="basicSelect">Please Enter your email</label>
-                                    <input type="email" class="form-control" name="ad_account_id">
+                                    <input type="email" class="form-control" name="email" value={{ $fb_email}}>
                                 </div>
 
 

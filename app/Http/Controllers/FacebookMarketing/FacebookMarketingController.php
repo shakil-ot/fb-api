@@ -176,8 +176,9 @@ class FacebookMarketingController extends Controller
     {
         $user = User::where(['id' => $id])->first();
         $fb_access_token = $user->fb_access_token;
+        $fb_email = $user->email;
 
-        $request['access_token'] = "EAAqXFOLkdBcBAMLFhqrpoHoguxmb8xJgwCxKiZBcZCZB35boNZADIUCgRcLweu54TQqrLBDZC4hkDaX3BMgUOCFpBI4ndnmEo2WqBDT411v3wnYbe9QCq15T3ObG7defQoSEgfVJWZCZCS3fU0KTsTK4pOzeP6MaJtuVGNZAdgrmo6Xk8kN06ujvlzhoViWfwPA5iDZBzBJg8Ot02JGhbT2TEKwWnxRwCd1aFb5EPZCaGBQoWHNZBxUM5cO";
+        $request['access_token'] = "EAAKZCdYOZAIMcBADQR1nYuFtThBKkXWEBLAHBSbOcav8WBKFDATIT11aftsiWZCCLLVuIwp0X5CS3dHom9NIZAtvITc21ijSY4FiV1bKA4Bl1Yy3KB5NlszMmDqZCdkeKx8AvyRMoxLKu7hvcI16wWWZAiw90NrICi9Y5YZB578T1qSuGVZBOZCP6q0MvnJDNp1UH5kLS1YEHoAZDZD";
 
 
         $adAccount = $this->facebookMarketingService->adAccountAPI($request);
@@ -229,7 +230,7 @@ class FacebookMarketingController extends Controller
             'pixelLists' => $pixelList,
             'igLists' => $igList,
             'fb_access_token' => $fb_access_token,
-            'fb_access_token' => $fb_access_token,
+            'fb_email' => $user->email,
             'user_id' => $user->id,
         ]);
     }

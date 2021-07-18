@@ -38,17 +38,17 @@ class HomeController extends Controller
             session_start();
         }
 
-//        $facebook = new Facebook([
-//            'app_id' => '2408007206010027', // Replace {app-id} with your app id
-//            'app_secret' => 'cc18de68828a45a105997e343bac2b6a',
-//            'default_graph_version' => 'v11.0',
-//        ]);
-
         $facebook = new Facebook([
-            'app_id' => '504305724113314', // Replace {app-id} with your app id
-            'app_secret' => '5210fa8060836b4dff344c20e54cf92f',
+            'app_id' => '2408007206010027', // Replace {app-id} with your app id
+            'app_secret' => 'cc18de68828a45a105997e343bac2b6a',
             'default_graph_version' => 'v11.0',
         ]);
+
+//        $facebook = new Facebook([
+//            'app_id' => '504305724113314', // Replace {app-id} with your app id
+//            'app_secret' => '5210fa8060836b4dff344c20e54cf92f',
+//            'default_graph_version' => 'v11.0',
+//        ]);
 
         $facebook_output = '';
 
@@ -86,61 +86,8 @@ class HomeController extends Controller
 
         $facebook_login_url = $facebook_helper->getLoginUrl('http://localhost:8000/home/');
 
-        /*******************************************************************8*/
-
-        $request['access_token'] = auth()->user()->fb_access_token;
-//        $request['page_access_token'] = 'EAAqXFOLkdBcBAMAfuK4Fe50xDSWZA7wSSWojscq9s6ntzRpvndfLan8gdV4j4I7N7nRh4K7lXGsO2uUzVxNhcMygjcs85ZCRHhuNwmPhZCg2qnS8Cux5MVYhgY97uYntmgeEnQZCyNTjZBipINWvxkN56zZCtb7bPc1RseUnI6zB0JP3q0poi4RTri5nZBHpZBXZBONMuETXAIT4RPdttjhoZA';
-//        $request['businessId'] = '100405035640930';
-//        $request['act_ad_account'] = 'act_493626251700401';
-
-        $adAccount = $this->facebookMarketingService->adAccountAPI($request);
-
-
-        $pageList = $this->facebookMarketingService->getPageListAPI($request);
-
-        $business = json_decode($adAccount, true);
-
-        $request['businessId'] = $business['data'][0]['id'];
-
-        $pixelList = $this->facebookMarketingService->getPixelListAPI($request);
-
-
-
-        $igList = $this->facebookMarketingService->getInstagramListAPI($request);
-
-        //dd(json_decode($adAccount,true));
-
-        $adAccount = json_decode($adAccount, true);
-
-        $pageList = json_decode($pageList, true);
-
-        $pixelList = json_decode($pixelList, true);
-
-        $igList = json_decode($igList, true);
-
-
-        if (isset($adAccount["data"][0])) {
-            $adAccount = $adAccount["data"];
-        }
-
-        if (isset($pageList["data"][0])) {
-            $pageList = $pageList["data"];
-        }
-
-        if (isset($pixelList["data"][0])) {
-            $pixelList = $pixelList["data"];
-        }
-
-        if (isset($igList["data"][0])) {
-            $igList = $igList["data"];
-        }
-
 
         return view('home')->with([
-            'adAccounts' => $adAccount,
-            'pageLists' => $pageList,
-            'pixelLists' => $pixelList,
-            'igLists' => $igList,
             'facebook_login_url' => $facebook_login_url
         ]);
 
