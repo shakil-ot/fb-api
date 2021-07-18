@@ -31,5 +31,6 @@ Route::get('/createBusinessManager', 'FacebookMarketing\FacebookMarketingControl
 Route::get('/clientAdAccount', 'FacebookMarketing\FacebookMarketingController@clientAdAccount');
 Route::get('/claimClientPage', 'FacebookMarketing\FacebookMarketingController@claimClientPage');
 Route::get('/claimAdAccount', 'FacebookMarketing\FacebookMarketingController@claimAdAccount');
+Route::get('/fbLogin', 'FacebookMarketing\FacebookMarketingController@fbLogin');
 
 
