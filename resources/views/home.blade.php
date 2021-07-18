@@ -1,11 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
+
+
     <div class="row">
         <div class="col-md-12">
             <div class="card mb-4">
                 <div class="card-body">
-                    <div class="card-header">Dashboard</div>
+                    <div class="card-header"> Facebook </div>
+
+                    <div class="col-sm-6 col-12">
+                        <label for="valid-state">Url</label>
+                        <input type="text" class="form-control is-valid" id="valid-state" placeholder="Valid" value="http://localhost:8000/{{ auth()->id() }}/facebook/permission" required="">
+                        <div class="valid-feedback"></div>
+                    </div>
 
                     <div class="card-body">
                         @if (session('status'))
@@ -14,59 +22,30 @@
                             </div>
                         @endif
 
-                        You are logged in!
+                        <a href="{{ $facebook_login_url }}" class="btn btn-sm btn-facebook" > Please Login in fb </a>
                     </div>
                 </div>
             </div>
         </div>
-        <div>
-            <h2>Choose Ad Account(s)</h2>
-
-            <select>
-                @foreach($adAccounts as $value)
-                    <option value="{{ $value['id']}}">{{ $value['name']}}</option>
-                @endforeach
-            </select>
-
-            <br>
-
-            <h2>Choose Page(s)</h2>
-
-                <select>
-                    @foreach($pageLists as $page)
-                    <option value="{{ $page['id']}}">{{ $page['name']}}</option>
-                    @endforeach
-                </select>
-
-{{--            <br>--}}
-
-{{--            <h2>Choose Catalogue(s)</h2>--}}
-
-{{--            <select id="cars" name="cars">--}}
-{{--                @foreach($pageLists as $page)--}}
-{{--                    <option value="{{ $page['id']}}">{{ $page['name']}}</option>--}}
-{{--                @endforeach--}}
-{{--            </select>--}}
-
-            <br>
-            <h2>Choose Pixel(s)</h2>
-
-            <select>
-                @foreach($pixelLists as $pixel)
-                    <option value="{{ $pixel['id']}}">{{ $pixel['name']}}</option>
-                @endforeach
-            </select>
-
-            <br>
-            <h2>Choose Instagram Account(s)</h2>
-
-            <select>
-                @foreach($igLists as $ig)
-                    <option value="{{ $ig['id']}}">{{ $ig['username']}}</option>
-                @endforeach
-            </select>
 
 
-        </div>
+
+
+
+
+
+
+
+
+
+
+
+
     </div>
+
+
+
+
+
+
 @endsection

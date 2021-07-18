@@ -28,12 +28,12 @@ class FacebookMarketingService implements FacebookMarketingContract
 
     public function adAccountAPI(Request $request)
     {
-
         $ch = curl_init();
-        $url = $this->fbUrl.'/me/businesses?access_token='.trim($request['access_token']);
 
+        $url = $this->fbUrl . '/me/businesses?access_token=' . trim($request['access_token']);
 
-        curl_setopt($ch, CURLOPT_URL,$url);
+        curl_setopt($ch, CURLOPT_URL, $url);
+
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $headers = array();
 
@@ -74,8 +74,8 @@ class FacebookMarketingService implements FacebookMarketingContract
      * This is The list of pixel ID
      *
      * future work : get the name of the pixel like ?fields=name
-//     * @param$accessToken
-//     * @param$businessId
+     * //     * @param$accessToken
+     * //     * @param$businessId
      * @returnmixed
      */
 
@@ -83,7 +83,7 @@ class FacebookMarketingService implements FacebookMarketingContract
     public function getPixelListAPI(Request $request)
     {
         $ch = curl_init();
-        $url = $this->fbUrl.$request['businessId'].'/adspixels?fields=name&access_token='.trim($request['access_token']);
+        $url = $this->fbUrl . $request['businessId'] . '/adspixels?fields=name&access_token=' . trim($request['access_token']);
 
         //curl_setopt($ch, CURLOPT_URL, 'https://graph.facebook.com/v11.0/<business_id>/adspixels?fields=name&&access_token=');
 
@@ -96,7 +96,9 @@ class FacebookMarketingService implements FacebookMarketingContract
         // curl_setopt($ch, CURLOPT_POSTFIELDS, "fields=name\"code\"&access_token=");
 
         $headers = array();
+
         $headers[] = 'Content-Type: application/x-www-form-urlencoded';
+
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
         $result = curl_exec($ch);
@@ -117,7 +119,7 @@ class FacebookMarketingService implements FacebookMarketingContract
 
         $ch = curl_init();
 
-        $url = $this->fbUrl.$request['businessId']."/instagram_accounts?fields=username&access_token=".$request['access_token'];
+        $url = $this->fbUrl . $request['businessId'] . "/instagram_accounts?fields=username&access_token=" . $request['access_token'];
 
         curl_setopt($ch, CURLOPT_URL, $url);
 
@@ -169,7 +171,7 @@ class FacebookMarketingService implements FacebookMarketingContract
             echo 'Error:' . curl_error($ch);
         }
         curl_close($ch);
-    //dd($result,true);
+        //dd($result,true);
         return $result;
 
 
@@ -178,7 +180,7 @@ class FacebookMarketingService implements FacebookMarketingContract
     public function grantAccessToAssetsForAnotherBusinessManagerAPI(Request $request)
     {
         $ch = curl_init();
-        $url = $this->fbUrl.$request['pageId']."/agencies?access_token=".$request['access_token'];
+        $url = $this->fbUrl . $request['pageId'] . "/agencies?access_token=" . $request['access_token'];
 
         curl_setopt($ch, CURLOPT_URL, $url);
 
@@ -208,7 +210,7 @@ class FacebookMarketingService implements FacebookMarketingContract
     {
         $ch = curl_init();
 
-        $url = $this->fbUrl.$request['businessId']."/system_users?access_token=".$request['access_token'];
+        $url = $this->fbUrl . $request['businessId'] . "/system_users?access_token=" . $request['access_token'];
 
         curl_setopt($ch, CURLOPT_URL, $url);
 
@@ -230,10 +232,10 @@ class FacebookMarketingService implements FacebookMarketingContract
         $access_token = "";
         $ch = curl_init();
 
-        $url = $this->fbUrl.$request['partnerBusinessId']."/businesses";
-      //  curl_setopt($ch, CURLOPT_URL, 'https://graph.facebook.com/v2.11/619658698964160/businesses');
+        $url = $this->fbUrl . $request['partnerBusinessId'] . "/businesses";
+        //  curl_setopt($ch, CURLOPT_URL, 'https://graph.facebook.com/v2.11/619658698964160/businesses');
 
-        curl_setopt($ch, CURLOPT_URL,$url);
+        curl_setopt($ch, CURLOPT_URL, $url);
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
@@ -251,7 +253,6 @@ class FacebookMarketingService implements FacebookMarketingContract
         $result = curl_exec($ch);
 
 
-
         if (curl_errno($ch)) {
             echo 'Error:' . curl_error($ch);
         }
@@ -264,11 +265,11 @@ class FacebookMarketingService implements FacebookMarketingContract
     public function clientAdAccountAPI(Request $request)
     {
         //https://developers.facebook.com/docs/marketing-api/business-asset-management/guides/business-to-business
-            //client ad account
+        //client ad account
 
         $ch = curl_init();
 
-        $url = $this->fbUrl.$request['business_id']."/client_ad_accounts?access_token=".$request['access_token'];
+        $url = $this->fbUrl . $request['business_id'] . "/client_ad_accounts?access_token=" . $request['access_token'];
         curl_setopt($ch, CURLOPT_URL, $url);
 
         //curl_setopt($ch, CURLOPT_URL, 'https://graph.facebook.com/v11.0/<BUSINESS_ID>/client_ad_accounts?access_token=<ACCESS_TOKEN>');
@@ -309,9 +310,9 @@ class FacebookMarketingService implements FacebookMarketingContract
          *
          *
          */
-        $url = $this->fbUrl.$request['clientBusinessId']."/client_pages";
+        $url = $this->fbUrl . $request['clientBusinessId'] . "/client_pages";
 
-            //curl_setopt($ch, CURLOPT_URL, 'https://graph.facebook.com/v11.0/client business ID/client_pages');
+        //curl_setopt($ch, CURLOPT_URL, 'https://graph.facebook.com/v11.0/client business ID/client_pages');
 
         curl_setopt($ch, CURLOPT_URL, $url);
 
@@ -345,7 +346,7 @@ class FacebookMarketingService implements FacebookMarketingContract
 
         $ch = curl_init();
 
-        $url = $this->fbUrl.$request['businessId']."/owned_ad_accounts";
+        $url = $this->fbUrl . $request['businessId'] . "/owned_ad_accounts";
 
         curl_setopt($ch, CURLOPT_URL, $url);
 
