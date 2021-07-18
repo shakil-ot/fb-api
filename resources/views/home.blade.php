@@ -17,14 +17,12 @@
                         You are logged in!
                     </div>
                 </div>
-
-
             </div>
         </div>
-        <div class="card-body">
+        <div>
             <h2>Choose Ad Account(s)</h2>
 
-            <select id="cars" name="cars">
+            <select>
                 @foreach($adAccounts as $value)
                     <option value="{{ $value['id']}}">{{ $value['name']}}</option>
                 @endforeach
@@ -34,8 +32,7 @@
 
             <h2>Choose Page(s)</h2>
 
-
-                <select id="cars" name="cars">
+                <select>
                     @foreach($pageLists as $page)
                     <option value="{{ $page['id']}}">{{ $page['name']}}</option>
                     @endforeach
@@ -54,7 +51,7 @@
             <br>
             <h2>Choose Pixel(s)</h2>
 
-            <select id="cars" name="cars">
+            <select>
                 @foreach($pixelLists as $pixel)
                     <option value="{{ $pixel['id']}}">{{ $pixel['name']}}</option>
                 @endforeach
@@ -63,7 +60,7 @@
             <br>
             <h2>Choose Instagram Account(s)</h2>
 
-            <select id="cars" name="cars">
+            <select>
                 @foreach($igLists as $ig)
                     <option value="{{ $ig['id']}}">{{ $ig['username']}}</option>
                 @endforeach
